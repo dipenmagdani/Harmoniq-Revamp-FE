@@ -1,4 +1,4 @@
-# Harmoniq - Music Streaming Platform
+# Harmoniq Revamp - Music Streaming Platform
 
 A modern music streaming platform built with Next.js 16, React 19, TypeScript, and Tailwind CSS.
 
