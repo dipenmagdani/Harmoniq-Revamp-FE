@@ -22,6 +22,8 @@ export default function SearchPage() {
         setLoading(true);
         try {
           const res = await api.searchAll(query);
+          console.log("🚀 ~ SearchPage ~ res:", res);
+
           setResults(res.data);
         } catch (e) {
           console.error(e);
@@ -87,8 +89,8 @@ export default function SearchPage() {
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Top Result */}
                 {results.topQuery &&
-                  results.topQuery.results &&
-                  results.topQuery.results.length > 0 && (
+                  results.topQuery.data &&
+                  results.topQuery.data.length > 0 && (
                     <section>
                       <h2 className="text-xl font-bold text-white mb-4">
                         Top Result
@@ -97,15 +99,15 @@ export default function SearchPage() {
                         <img
                           alt=""
                           className="w-32 h-32 rounded-full shadow-2xl object-cover group-hover:scale-105 transition-transform"
-                          src={getImageUrl(results.topQuery.results[0].image)}
+                          src={getImageUrl(results.topQuery.data[0].image)}
                         />
                         <div>
                           <h3 className="text-3xl font-bold text-white mb-2">
-                            {results.topQuery.results[0].title ||
-                              results.topQuery.results[0].name}
+                            {results.topQuery.data[0].title ||
+                              results.topQuery.data[0].name}
                           </h3>
                           <span className="px-3 py-1 rounded-full bg-white/10 text-xs font-bold uppercase tracking-wider text-zinc-300">
-                            {results.topQuery.results[0].type}
+                            {results.topQuery.data[0].type}
                           </span>
                         </div>
                       </div>
@@ -114,14 +116,14 @@ export default function SearchPage() {
 
                 {/* Songs */}
                 {results.songs &&
-                  results.songs.results &&
-                  results.songs.results.length > 0 && (
+                  results.songs.data &&
+                  results.songs.data.length > 0 && (
                     <section>
                       <h2 className="text-xl font-bold text-white mb-4">
                         Songs
                       </h2>
                       <div className="space-y-2">
-                        {results.songs.results.slice(0, 4).map((song: any) => (
+                        {results.songs.data.slice(0, 4).map((song: any) => (
                           <div
                             key={song.id}
                             className="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl group cursor-pointer transition-colors"
@@ -169,14 +171,14 @@ export default function SearchPage() {
 
               {/* Albums */}
               {results.albums &&
-                results.albums.results &&
-                results.albums.results.length > 0 && (
+                results.albums.data &&
+                results.albums.data.length > 0 && (
                   <section>
                     <h2 className="text-xl font-bold text-white mb-4">
                       Albums
                     </h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                      {results.albums.results.slice(0, 5).map((item: any) => (
+                      {results.albums.data.slice(0, 5).map((item: any) => (
                         <GenericCard
                           key={item.id}
                           id={item.id}
